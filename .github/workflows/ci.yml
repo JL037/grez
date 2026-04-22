@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: grez
+          POSTGRES_PASSWORD: grez
+          POSTGRES_DB: grez
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U grez"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgresql://grez:grez@localhost:5432/grez?schema=public
+      JWT_SECRET: ci-test-secret-at-least-16-chars
+      ATPROTO_CLIENT_ID: http://localhost:3001/oauth/client-metadata.json
+      ATPROTO_REDIRECT_URI: http://localhost:3001/oauth/callback
+      ADMIN_DID: did:plc:ci-test-admin
+      NODE_ENV: test
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: pnpm db:generate
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Test
+        run: pnpm test
+
+      - name: Check migrations
+        run: pnpm --filter @grez/db exec prisma migrate diff --from-migrations ./prisma/migrations --to-schema-datamodel ./prisma/schema.prisma --exit-code
