@@ -23,13 +23,6 @@
     }
   },
   "files": {
-    "ignore": [
-      "node_modules",
-      "dist",
-      ".next",
-      ".turbo",
-      "*.generated.*",
-      "prisma/migrations"
-    ]
+    "ignore": ["node_modules", "dist", ".next", ".turbo", "*.generated.*", "prisma/migrations"]
   }
 }

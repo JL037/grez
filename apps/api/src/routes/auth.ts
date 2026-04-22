@@ -1,10 +1,10 @@
-import type { FastifyInstance } from 'fastify';
+import { Agent } from '@atproto/api';
 import type { NodeSavedSession, NodeSavedState } from '@atproto/oauth-client-node';
 import { NodeOAuthClient } from '@atproto/oauth-client-node';
-import { Agent } from '@atproto/api';
-import { SignJWT, jwtVerify } from 'jose';
 import { prisma } from '@grez/db';
 import { env } from '@grez/shared';
+import type { FastifyInstance } from 'fastify';
+import { SignJWT, jwtVerify } from 'jose';
 import { z } from 'zod';
 
 const stateStore = new Map<string, NodeSavedState>();
@@ -147,7 +147,8 @@ export async function authRoutes(app: FastifyInstance) {
         maxAge: 60 * 60 * 24 * 7,
       });
 
-      const frontendUrl = env().NEXT_PUBLIC_API_URL?.replace(':3001', ':3000') || 'http://localhost:3000';
+      const frontendUrl =
+        env().NEXT_PUBLIC_API_URL?.replace(':3001', ':3000') || 'http://localhost:3000';
       return reply.redirect(frontendUrl);
     } catch (err) {
       app.log.error(err, 'OAuth callback failed');

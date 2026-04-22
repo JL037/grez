@@ -1,5 +1,5 @@
-import type { FastifyInstance } from 'fastify';
 import { prisma } from '@grez/db';
+import type { FastifyInstance } from 'fastify';
 
 export async function healthRoutes(app: FastifyInstance) {
   app.get('/health', async (_request, reply) => {

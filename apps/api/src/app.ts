@@ -1,17 +1,17 @@
-import fastify from 'fastify';
-import cors from '@fastify/cors';
 import cookie from '@fastify/cookie';
+import cors from '@fastify/cors';
 import rateLimit from '@fastify/rate-limit';
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUi from '@fastify/swagger-ui';
+import { env } from '@grez/shared';
+import fastify from 'fastify';
 import {
+  type ZodTypeProvider,
   serializerCompiler,
   validatorCompiler,
-  type ZodTypeProvider,
 } from 'fastify-type-provider-zod';
-import { env } from '@grez/shared';
-import { healthRoutes } from './routes/health.js';
 import { authRoutes } from './routes/auth.js';
+import { healthRoutes } from './routes/health.js';
 
 export async function buildApp() {
   const config = env();
@@ -31,7 +31,7 @@ export async function buildApp() {
   app.setSerializerCompiler(serializerCompiler);
 
   await app.register(cors, {
-    origin: config.NODE_ENV === 'production' ? false : true,
+    origin: config.NODE_ENV !== 'production',
     credentials: true,
   });
 
