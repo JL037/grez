@@ -1,0 +1,33 @@
+{
+  "name": "@grez/api",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@grez/db": "workspace:*",
+    "@grez/shared": "workspace:*",
+    "fastify": "^5.2.0",
+    "@fastify/cors": "^11.0.0",
+    "@fastify/cookie": "^11.0.0",
+    "@fastify/rate-limit": "^10.2.0",
+    "@fastify/swagger": "^9.4.0",
+    "@fastify/swagger-ui": "^5.2.0",
+    "fastify-type-provider-zod": "^4.0.2",
+    "@atproto/oauth-client-node": "^0.3.17",
+    "@atproto/api": "^0.19.9",
+    "jose": "^6.0.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "pino-pretty": "^13.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}
