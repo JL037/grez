@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+model User {
+  did         String   @id
+  handle      String   @unique
+  displayName String?
+  avatarUrl   String?
+  role        UserRole @default(USER)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  restaurants Restaurant[]
+  reviews     Review[]
+  threads     ForumThread[]
+  posts       ForumPost[]
+}
+
+model Restaurant {
+  id                String   @id @default(cuid())
+  name              String
+  address           String
+  cuisine           String
+  insuranceType     String
+  insuranceProvider String
+  website           String?
+  description       String?
+  submittedBy       String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  submitter User     @relation(fields: [submittedBy], references: [did])
+  reviews   Review[]
+
+  @@index([cuisine])
+  @@index([insuranceType])
+}
+
+model Review {
+  id           String   @id @default(cuid())
+  restaurantId String
+  authorDid    String
+  rating       Int
+  body         String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  author     User       @relation(fields: [authorDid], references: [did])
+
+  @@unique([restaurantId, authorDid])
+  @@index([restaurantId])
+}
+
+model ForumCategory {
+  id          String @id @default(cuid())
+  name        String @unique
+  slug        String @unique
+  description String?
+
+  threads ForumThread[]
+}
+
+model ForumThread {
+  id         String   @id @default(cuid())
+  categoryId String
+  title      String
+  body       String
+  authorDid  String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  category ForumCategory @relation(fields: [categoryId], references: [id])
+  author   User          @relation(fields: [authorDid], references: [did])
+  posts    ForumPost[]
+
+  @@index([categoryId])
+}
+
+model ForumPost {
+  id        String   @id @default(cuid())
+  threadId  String
+  parentId  String?
+  authorDid String
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  thread ForumThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  parent ForumPost?  @relation("PostReplies", fields: [parentId], references: [id])
+  replies ForumPost[] @relation("PostReplies")
+  author  User        @relation(fields: [authorDid], references: [did])
+
+  @@index([threadId])
+  @@index([parentId])
+}
