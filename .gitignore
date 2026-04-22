@@ -1,0 +1,313 @@
+# =============================================================================
+# DEPENDENCIES
+# =============================================================================
+
+# Node modules (all packages)
+node_modules/
+**/node_modules/
+
+# Package manager files
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+.yarn-integrity
+.pnp.cjs
+.pnp.loader.mjs
+package-lock.json
+yarn.lock
+
+# =============================================================================
+# BUILD OUTPUTS
+# =============================================================================
+
+# TypeScript/JavaScript builds
+dist/
+dist-ssr/
+build/
+lib/
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Next.js
+.next/
+out/
+
+# Vite
+.vite/
+
+# Turborepo
+.turbo/
+
+# =============================================================================
+# ENVIRONMENT & SECRETS
+# =============================================================================
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+.env.staging
+
+# Secret files
+*.secret
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+
+# =============================================================================
+# DATABASE
+# =============================================================================
+
+# Local database files
+packages/db/prisma/*.db
+packages/db/prisma/*.db-journal
+packages/db/prisma/dev.db
+packages/db/prisma/test.db
+*.sqlite
+*.sqlite3
+*.db
+*.db3
+
+# Migration lock files (optional - some teams track these)
+# packages/db/prisma/migrations/migration_lock.toml
+
+# =============================================================================
+# DOCKER
+# =============================================================================
+
+docker/data/
+docker/volumes/
+docker/*.env
+docker-compose.override.yml
+
+# =============================================================================
+# LOGS
+# =============================================================================
+
+*.log
+logs/
+log/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# =============================================================================
+# TESTING & COVERAGE
+# =============================================================================
+
+# Test outputs
+coverage/
+.nyc_output/
+*.lcov
+
+# Playwright (when added)
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Cypress (if ever used)
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+
+# Vitest
+vitest.config.ts.timestamp-*
+
+# Jest (if ever used)
+jest.config.js.timestamp-*
+
+# =============================================================================
+# CACHE
+# =============================================================================
+
+# Module caches
+.cache/
+*.cache
+.parcel-cache/
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# ESLint/Prettier caches (if ever used)
+.eslintcache
+.prettiercache
+stylelintcache
+
+# =============================================================================
+# IDE & EDITORS
+# =============================================================================
+
+# VS Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.vscode-test/
+
+# JetBrains
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Vim/Neovim
+*.swp
+*.swo
+*.swn
+*~
+.netrwhist
+Session.vim
+
+# Emacs
+*~
+\#*\#
+\.\#*
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
+# Nova
+.nova/
+
+# Fleet
+.fleet/
+
+# Zed
+.zed/
+
+# =============================================================================
+# OS FILES
+# =============================================================================
+
+# macOS
+.DS_Store
+.DS_Store?
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.nfs*
+.directory
+
+# =============================================================================
+# TEMPORARY FILES
+# =============================================================================
+
+# Temp files
+*.tmp
+*.temp
+*.temp.*
+*.tmp.*
+tmp/
+temp/
+tmp.*
+
+# Backup files
+*.bak
+*.backup
+*.orig
+*.original
+*.save
+*.old
+
+# Patch files
+*.patch
+*.diff
+*.rej
+
+# =============================================================================
+# DEBUGGING
+# =============================================================================
+
+# Debug files
+.vscode-test/
+*.prof
+*.heapprofile
+
+# Chrome/Firefox debugging
+.chrome/
+.firefox/
+
+# =============================================================================
+# DEPLOYMENT & CI/CD
+# =============================================================================
+
+# Vercel
+.vercel/
+
+# Netlify
+.netlify/
+
+# AWS
+.aws/
+
+# =============================================================================
+# DOCUMENTATION (Dev-only)
+# =============================================================================
+
+# Local docs build
+site/
+.docusaurus/
+
+# =============================================================================
+# MISC
+# =============================================================================
+
+# Storybook (if ever added)
+storybook-static/
+
+# GraphQL generated files
+*.graphql.d.ts
+*.graphqls.d.ts
+
+# Generated code (if any)
+generated/
+*.generated.ts
+*.generated.js
+
+# Local SSL certificates
+*.localhost.crt
+*.localhost.key
+
+# pnpm specific
+.pnpm-debug.log*
+
+# Corepack
+.corepack/
+
+# TypeScript incremental builds
+*.tsbuildinfo
+**/*.tsbuildinfo
+
+# Optional: Uncomment if you want to ignore specific config overrides
+# docker-compose.override.yml
+# next.config.local.js
+
